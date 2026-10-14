@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Board | Task Manager</title>
+    <link rel="shortcut icon" href="img/vite.svg" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+ 
+  <header class="app-header py-3">
+    <div class="container-fluid px-4 px-lg-5 d-flex align-items-center justify-content-between">
+      <a  class="brand text-decoration-none">
+        <i class="fa-solid fa-table-columns"></i>
+        Kanban
+      </a>
+      <button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#taskModal" aria-label="Add task">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
+  </header>
+
+ 
+  <main class="container-fluid px-4 px-lg-5 py-4 py-lg-5">
+    <div class="row g-4">
+
+     
+      <div class="col-12 col-lg-4" id="todosection">
+        <section class="column" aria-labelledby="col-todo">
+          <div class="column-head">
+            <span class="column-icon icon-todo"><i class="fa-solid fa-clipboard-list"></i></span>
+            <div>
+              <h2 class="column-title" id="col-todo">To Do</h2>
+              <p class="column-count" id="addtakstodo" >0 tasks</p>
+            </div>
+          </div>
+          <div id="rowDataToDo" >
+            <div class="text-center mt-5 " >
+            <span class="fs-1" >
+              <i class="fa-regular fa-folder-open" style="color: #C5CEDB;"></i>
+            </span>
+            <span class="d-block " style="color: #C5CEDB;" >
+              No tasks yet
+            </span>
+            <span style="color: #C5CEDB;">
+              Click + to add one
+            </span>
+          </div>
+          
+          </div>
+          
+        </section>
+      </div>
+
+    
+      <div class="col-12 col-lg-4">
+        <section class="column" aria-labelledby="col-progress">
+          <div class="column-head">
+            <span class="column-icon icon-progress"><i class="fa-solid fa-spinner"></i></span>
+            <div>
+              <h2 class="column-title" id="col-progress">In Progress</h2>
+              <p class="column-count" id="pprogress" >0 tasks</p>
+            </div>
+          </div>
+          <div class="text-center mt-5 " id="progresssection" >
+            
+          </div>
+          <div id="rowDataProgress" >
+
+          </div>
+         
+        </section>
+      </div>
+
+      
+      <div class="col-12 col-lg-4">
+        <section class="column" aria-labelledby="col-done">
+          <div class="column-head">
+            <span class="column-icon icon-done"><i class="fa-solid fa-circle-check"></i></span>
+            <div>
+              <h2 class="column-title" id="col-done">Completed</h2>
+              <p class="column-count" id="pcomplete">0 task</p>
+            </div>
+          </div>
+          
+          <div id="completelist">
+           
+
+          </div>
+         
+        </section>
+      </div>
+
+    </div>
+  </main>
+
+  
+  <footer class="app-footer">
+    Made with <i class="fa-solid fa-heart"></i> by Ahmed Mostafa Abd Al Aleem
+  </footer>
+
+  <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 640px;">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h2 class="modal-title" id="taskModalLabel">Create New Task</h2>
+          <button type="button" class="btn-close" id="btn-close" aria-label="Close"></button>
+        </div>
+
+        
+          <div class="modal-body">
+
+            <div class="mb-4">
+              <label for="taskTitle" class="field-label">
+                <i class="fa-solid fa-heading"></i>Task Title <span class="req">*</span>
+              </label>
+              <input type="text" id="taskTitle" class="form-control" placeholder="What needs to be done?">
+              <p id="msgTitle" class="alert alert-danger d-none">Title must be at least 3 characters</p>
+            </div>
+
+            <div class="row g-3 mb-4">
+              <div class="col-12 col-sm-6">
+                <label for="taskPriority" class="field-label"><i class="fa-solid fa-flag"></i>Priority</label>
+                <select id="taskPriority" class="form-select">
+                  <option value="low">Low</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+              <div class="col-12 col-sm-6">
+                <label for="taskDate" class="field-label"><i class="fa-regular fa-calendar"></i>Due Date</label>
+                <input type="date" id="taskDate" class="form-control">
+                <p id="msgDate" class="text-danger  d-none">Due date cannot be in the past</p>
+
+              </div>
+            </div>
+
+            <div>
+              <label for="taskDesc" class="field-label"><i class="fa-solid fa-align-left"></i>Description</label>
+              <textarea id="taskDesc" class="form-control" maxlength="500" placeholder="Add more details about this task..."></textarea>
+              <p class="char-count">0/500</p>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" id="cancelbtn" class="btn-cancel" >Cancel</button>
+            <button  id="addbtn" class="btn-submit"><i class="fa-solid fa-plus"></i>Add Task</button>
+            <button  id="savebtn" class="btn-submit d-none"><i class="fa-solid fa-floppy-disk" style="color: rgb(255, 255, 255);"></i>Save Changes</button>
+          </div>
+
+      </div>
+    </div>
+  </div>
+    <script src="Ts/bootstrap.bundle.min.js"></script>
+    <script type="module"  src="Ts/index.js"></script>
+</body>
+</html>
